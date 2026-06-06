@@ -136,24 +136,49 @@ Encoder Quality: Apple ≥ Intel ≥ NVIDIA >>> AMD<sup>\*</sup>
 
 <sup>\*</sup> This only represents the default Jellyfin settings. The quality may be different depending on your exact configuration.
 
-Intel is always recommended on non-Apple hardware for the following reasons:
+:::tip
 
-- Intel provides a good quality encoder, slightly better than NVIDIA and significantly better than AMD.
-- Intel drivers and the compute environment is much easier to setup than both NVIDIA and AMD
+#### Transcoding
 
-AMD is not recommended due to poor quality H.264 and H.265 (HEVC) output, as well as being hard to set up the compute environment. While AMD has significantly improved AV1 encoder quality, you are still more likely to transcode to H.264 or H.265 than to AV1 due to the hardware capabilities of the average Jellyfin client.
+**Transcoding** media to another codec is what makes GPUs useful in a Jellyfin server. Understanding codecs is important for chosing your GPU
+
+**A greater number of codecs** is desirable for decoding support. With that said, media is generally available in a small number of codecs. The most important one to look for is HEVC 10bit decoding support, as decoding can be CPU intensive.
+
+#### Codec references
 
 A list of common codecs can be found in the [codec support documentation](/docs/general/clients/codec-support/).
 
 The following is a list of video codecs Jellyfin supports transcoding to:
 
-- H.264 (most common transcode target)
-- H.265 (Jellyfin clients have limited support)
-- AV1 (new in Jellyfin v10.9, supported by most modern browsers)
+- **H.264** (most common transcode target)
+- **H.265** (Jellyfin clients have limited support)
+- **AV1** (new in Jellyfin v10.9, supported by most modern browsers)
 
-A greater number of codecs is desirable for decoding support. With that said, media is generally available in a small number of codecs. The most important one to look for is HEVC 10bit decoding support, as decoding can be CPU intensive.
+:::
 
-#### Intel Graphics
+#### Common recommendations
+
+##### Intel GPUs: recommended
+
+Intel GPUs are commonly recommended on non-Apple hardware for the following reasons:
+
+- **Intel provides a good quality encoder:** slightly better than NVIDIA, and significantly better than AMD.
+- **Easier to set up:** Intel drivers and the compute environment are much easier to setup than both NVIDIA and AMD
+
+##### AMD GPUs: not recommmended
+
+AMD GPUs are not recommended for the following reasons:
+
+- **Poor quality H.264 and H.265 (HEVC) output**
+- **Challenging to set up** the compute environment
+
+:::note
+
+While AMD has significantly improved **AV1 encoder quality**, you are still more likely to transcode to H.264 or H.265 than to AV1 due to the hardware capabilities of the average Jellyfin client.
+
+:::
+
+#### Intel GPUs
 
 Please refer to [this table](https://en.wikipedia.org/wiki/Intel_Quick_Sync_Video#Hardware_decoding_and_encoding) for supported codecs.
 
